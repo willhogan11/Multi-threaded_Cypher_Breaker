@@ -24,33 +24,29 @@ public class Consumer {
 	}
 
 
-	public void increment() throws InterruptedException{
+	public void increment() throws InterruptedException {
 		synchronized (lock) {
-			counter++;
-			if(counter == MAX_QUEUE_SIZE){
-			    // queue.put(new PoisonResult(result.getPlainText(), result.getKey(), result.getScore()));
-				
-				System.out.println("MAX QUEUE SIZE Reached " + MAX_QUEUE_SIZE);
-				System.out.println("Counter count: " + counter);
-				
-				
-				// queue.put((Resultable) new PoisonResult(poisonResult.getPoisonPlaintext(), poisonResult.getPoisonKey(), poisonResult.getPoisonScore()));	
-				// queue.put(poisonResult.printPoisonResult());
-				
-		/*		poisonResult.shutDown();
-				shutDown();
-				running = false;*/
+			counter++; // Increment the counter
+			if(counter == MAX_QUEUE_SIZE){ // If the counter equals the MAX_QUEUE_SIZE...
+				queue.put(new PoisonResult("Kill Queue", -1, -1.0)); // Add a poison object to the queue
+				shutDown(); // Gracefully shutdown the queue
+
+		    // Tried this way, but couldn't get it to work
+			/*	if(result instanceof PoisonResult){
+					return;
+				}*/
 			}
 		}
 	}
 	
 	public void shutDown(){
 		running = false;
+		System.out.println("Queue Poisoned Successfully");
+		System.exit(0);
 	}
 	
 
 	public void consume() throws Exception{
-		
 		fileParser = new FileParser(); // Create a FileParser Object
 		
 		// Start a load of producers
@@ -65,36 +61,19 @@ public class Consumer {
 			public void run() {
 				while(running){
 					try {
-						result = (Result) queue.take();
-						
-						result.printResult();
-						
+						result = (Result) queue.take();		
+						result.printResult();	
 						increment();
-						
-						// System.out.printf("Result " + poisonResult.getPoisonPlaintext(), poisonResult.getPoisonKey(), poisonResult.getPoisonScore());
-						
-						// queue.put(poisonResult.printPoisonResult());
-						
-				/*		if(queue.contains(poisonResult) || (counter == MAX_QUEUE_SIZE) ){
-							System.out.println("Contains Poison Result");
-							poisonResult.shutDown();
-						}
-						
-						if(!running){
-							return;
-						}*/
-						
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					} catch (Exception e) {
-						e.printStackTrace();
+						System.err.println("Error killing queue");
 					}
-				}
+				} 
 			}
 		});
 		thread1.start(); // Start thread
 		thread1.join(); // Main waits for thread to finish
-		shutDown(); // Gracefully shutdown the thread
 		
 	} // End init
-}
+} // End class

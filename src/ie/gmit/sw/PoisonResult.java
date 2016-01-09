@@ -1,20 +1,19 @@
 package ie.gmit.sw;
 
-public class PoisonResult implements Poisonable{
+public class PoisonResult extends Result implements Poisonable{
 	
-	private String poisonPlaintext = "KillQueue";
-	private int poisonKey = -1;
-	private double poisonScore = -1.0;
+	private String poisonPlaintext;
+	private int poisonKey;
+	private double poisonScore;
 	private boolean isRunning = true;
-
+	 
 	
 	public PoisonResult(String poisonPlaintext, int poisonKey, double poisonScore) {
-		super();
+		super(poisonPlaintext, poisonKey, poisonScore);
 		this.poisonPlaintext = poisonPlaintext;
 		this.poisonKey = poisonKey;
 		this.poisonScore = poisonScore;
 	}
-	
 	
 	public void printPoisonResult(){
 		System.out.println("poisonPlainText: " + this.poisonPlaintext);

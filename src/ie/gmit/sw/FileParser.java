@@ -5,9 +5,11 @@ import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-
+/* This Class reads the Key Value pairs from the 4grams.txt into a ConcurrentHashMap 
+ * where it will be later used to compare the values discovered during the decryption process*/
 public class FileParser {
 	
+	// Instance variables
 	private Map<String, Double> map = new ConcurrentHashMap<String, Double>();
 	private static final String file = "4grams.txt";
 	private String line;
