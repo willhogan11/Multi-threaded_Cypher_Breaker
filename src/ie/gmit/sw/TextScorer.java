@@ -2,7 +2,11 @@ package ie.gmit.sw;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-
+/**
+ * Compares each quad gram from the 4grams.txt with the Result returned 
+ * from the decryption effort and scores accordingly
+ * @author william
+ */
 public class TextScorer {
 	
 	private Map<String, Double> map = new ConcurrentHashMap<String, Double>();

@@ -1,6 +1,10 @@
 package ie.gmit.sw;
 import java.util.*;
 
+/**
+ * The application Runner that contains the main method
+ * @author Will Hogan
+ */
 public class Runner {
 
 	public static void main(String[] args) throws Exception {

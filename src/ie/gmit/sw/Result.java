@@ -1,5 +1,9 @@
 package ie.gmit.sw;
 
+/**
+ * Creates a Result object that contains best match plain text, key and score of the decryption effort
+ * @author william
+ */
 public class Result implements Resultable{
 	
 	private String plainText;
@@ -7,6 +11,12 @@ public class Result implements Resultable{
 	private double score;
 	private double maxScore;
 	
+	/**
+	 * Constructor for the Result class, that takes three parameters, 
+	 * @param plainText is the actual readable text that has been decrypted
+	 * @param key The number of keys, ie rows that are used to try and decrypt the encrypted code
+	 * @param score displays the best score, ie the best match to the original plain text message
+	 */
 	public Result(String plainText, int key, double score) {
 		super();
 		this.plainText = plainText;
@@ -14,6 +24,9 @@ public class Result implements Resultable{
 		this.score = score;
 	}
 	
+	/**
+	 * Displays the Result of each Result object
+	 */
 	public void printResult(){
 		System.out.println("PlainText: " + this.plainText);
 		System.out.println("Score: " + this.score);

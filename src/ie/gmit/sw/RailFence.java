@@ -1,10 +1,11 @@
 package ie.gmit.sw;
 
-/* Basic implementation of the Rail Fence Cypher using a 2D char array 
+/**
+ * Basic implementation of the Rail Fence Cypher using a 2D char array 
  * Note that there are more efficient ways to encrypt and decrypt, but the following implementation illustrates the steps
  * involved in each process and shows how the zig-zagging works. Feel free to change / adapt. 
+ * @author william
  */
-
 public class RailFence {
 	
 	//***** Encrypt a String called cypherText using an integer key ***** 

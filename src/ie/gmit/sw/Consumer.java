@@ -2,6 +2,11 @@ package ie.gmit.sw;
 import java.util.*;
 import java.util.concurrent.*;
 
+/**
+ * Consumer threads that are responsible for taking results from the Blocking Queue
+ * and incrementing a Synchronised counter
+ * @author william
+ */
 public class Consumer {
 	
 	private BlockingQueue<Resultable> queue; // Make sure you can't read from an empty queue
@@ -15,7 +20,11 @@ public class Consumer {
 	Object lock = new Object();
 	
 	
-	// Constructor
+	/**
+	 * The Consumer constructor that takes 2 parameters
+	 * @param cypherText The actual encrypted plainText values
+	 * @throws Exception
+	 */
 	public Consumer(String cypherText) throws Exception{
 		MAX_QUEUE_SIZE = cypherText.length()/2 - 2;
 		queue = new ArrayBlockingQueue<Resultable>(MAX_QUEUE_SIZE);
@@ -24,6 +33,12 @@ public class Consumer {
 	}
 
 
+	/**
+	 * Method that increments each count completed by each thread. It uses synchronized object locks to 
+	 * ensure that correct values are calculated during the process. When the counter reachs the maximum number of the queue, 
+	 * a poison onject is inserted into the queue to gracefully stop it
+	 * @throws InterruptedException
+	 */
 	public void increment() throws InterruptedException {
 		synchronized (lock) {
 			counter++; // Increment the counter
@@ -39,13 +54,19 @@ public class Consumer {
 		}
 	}
 	
+	/**
+	 * This method gracefully stops the Program
+	 */
 	public void shutDown(){
 		running = false;
 		System.out.println("Queue Poisoned Successfully");
 		System.exit(0);
 	}
 	
-
+	/**
+	 * This consumer method takes each result off the queue
+	 * @throws Exception
+	 */
 	public void consume() throws Exception{
 		fileParser = new FileParser(); // Create a FileParser Object
 		

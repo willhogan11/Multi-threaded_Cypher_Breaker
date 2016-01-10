@@ -1,5 +1,9 @@
 package ie.gmit.sw;
 
+/**
+ * Deals with Poisoning a Blocking Queue, that effectively stops it
+ * @author william
+ */
 public class PoisonResult extends Result implements Poisonable{
 	
 	private String poisonPlaintext;
@@ -8,6 +12,12 @@ public class PoisonResult extends Result implements Poisonable{
 	private boolean isRunning = true;
 	 
 	
+	/**
+	 * Constructor for the Result class, that takes three parameters,
+	 * @param poisonPlaintext The Poison plain text used to kill the queue
+	 * @param poisonKey The Key associated with it
+	 * @param poisonScore The Score Associated with it
+	 */
 	public PoisonResult(String poisonPlaintext, int poisonKey, double poisonScore) {
 		super(poisonPlaintext, poisonKey, poisonScore);
 		this.poisonPlaintext = poisonPlaintext;
@@ -15,6 +25,9 @@ public class PoisonResult extends Result implements Poisonable{
 		this.poisonScore = poisonScore;
 	}
 	
+	/**
+	 * Displays the Result of each Result object
+	 */
 	public void printPoisonResult(){
 		System.out.println("poisonPlainText: " + this.poisonPlaintext);
 		System.out.println("poisonKey: " + this.poisonKey);

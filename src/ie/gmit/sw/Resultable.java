@@ -1,9 +1,11 @@
 package ie.gmit.sw;
 
+/**
+ * Interface that contains purely declarative methods 
+ * @author william
+ */
 public interface Resultable {
-	
-	/* This Interface Resultable is purely declarative
-	 * The class Result implements this class and is forced to Inherit all this interface's methods*/
+
 	public abstract String getPlainText();
 	public abstract void setPlainText(String plainText);
 	public abstract int getKey();
